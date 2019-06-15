@@ -8,16 +8,15 @@ const dispatchProps = {
   getPostsForUser: appActions.getPostsForUserRequest
 };
 
-class Component extends React.Component {
-  componentDidMount() {
-    this.props.getUsers({
-      onComplete: users => this.props.getPostsForUser(users[0].id)
+const Component = ({ getPostsForUser, getUsers }) => {
+  React.useEffect(() => {
+    getUsers({
+      onComplete: users => getPostsForUser(users[0].id)
     });
-  }
-  render() {
-    return <h1> Render is irrelevant here </h1>;
-  }
-}
+  }, []);
+
+  return <h1> Render is irrelevant here </h1>;
+};
 
 export const App = connect(
   null,
